@@ -1,0 +1,350 @@
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Users,
+  UserCheck,
+  Calendar,
+  BarChart3,
+  QrCode,
+  Clock,
+  TrendingUp,
+  School,
+} from "lucide-react";
+
+function Home() {
+  const quickStats = [
+    {
+      label: "Total Students",
+      value: "1,234",
+      icon: Users,
+      color: "text-blue-600",
+    },
+    {
+      label: "Present Today",
+      value: "1,156",
+      icon: UserCheck,
+      color: "text-green-600",
+    },
+    {
+      label: "Classes Active",
+      value: "24",
+      icon: School,
+      color: "text-purple-600",
+    },
+    {
+      label: "Attendance Rate",
+      value: "93.7%",
+      icon: TrendingUp,
+      color: "text-orange-600",
+    },
+  ];
+
+  const recentActivity = [
+    {
+      time: "08:30 AM",
+      activity: "Class 10A attendance completed",
+      status: "completed",
+    },
+    {
+      time: "08:25 AM",
+      activity: "15 students marked present via QR scan",
+      status: "info",
+    },
+    {
+      time: "08:20 AM",
+      activity: "Class 9B attendance started",
+      status: "active",
+    },
+    {
+      time: "08:15 AM",
+      activity: "Morning attendance session began",
+      status: "info",
+    },
+  ];
+
+  const upcomingTasks = [
+    {
+      task: "Generate weekly attendance report",
+      due: "Today, 2:00 PM",
+      priority: "high",
+    },
+    {
+      task: "Review absent students list",
+      due: "Today, 3:30 PM",
+      priority: "medium",
+    },
+    {
+      task: "Update student database",
+      due: "Tomorrow, 9:00 AM",
+      priority: "low",
+    },
+    {
+      task: "Parent notification for low attendance",
+      due: "Tomorrow, 11:00 AM",
+      priority: "high",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                Digital Attendance System
+              </h1>
+              <p className="text-gray-600">
+                Welcome back! Here's your attendance overview for today.
+              </p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Badge
+                variant="outline"
+                className="text-green-600 border-green-200"
+              >
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                System Online
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {quickStats.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <Card
+                key={index}
+                className="bg-white hover:shadow-md transition-shadow"
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">
+                        {stat.label}
+                      </p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {stat.value}
+                      </p>
+                    </div>
+                    <Icon className={`h-8 w-8 ${stat.color}`} />
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        {/* Quick Actions */}
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold">
+              Quick Actions
+            </CardTitle>
+            <CardDescription>
+              Common tasks and shortcuts for attendance management
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Button className="h-20 flex-col space-y-2" variant="outline">
+                <UserCheck className="w-6 h-6" />
+                <span>Take Attendance</span>
+              </Button>
+              <Button className="h-20 flex-col space-y-2" variant="outline">
+                <QrCode className="w-6 h-6" />
+                <span>QR Scanner</span>
+              </Button>
+              <Button className="h-20 flex-col space-y-2" variant="outline">
+                <BarChart3 className="w-6 h-6" />
+                <span>View Reports</span>
+              </Button>
+              <Button className="h-20 flex-col space-y-2" variant="outline">
+                <Users className="w-6 h-6" />
+                <span>Manage Students</span>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Recent Activity */}
+          <Card className="lg:col-span-2 bg-white">
+            <CardHeader>
+              <CardTitle className="text-xl font-semibold">
+                Recent Activity
+              </CardTitle>
+              <CardDescription>
+                Latest attendance updates and system activities
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {recentActivity.map((activity, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg"
+                  >
+                    <div className="flex-shrink-0">
+                      <div
+                        className={`w-2 h-2 rounded-full mt-2 ${
+                          activity.status === "completed"
+                            ? "bg-green-500"
+                            : activity.status === "active"
+                              ? "bg-blue-500"
+                              : "bg-gray-400"
+                        }`}
+                      ></div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900">
+                        {activity.activity}
+                      </p>
+                      <p className="text-xs text-gray-500">{activity.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Upcoming Tasks */}
+          <Card className="bg-white">
+            <CardHeader>
+              <CardTitle className="text-xl font-semibold">
+                Upcoming Tasks
+              </CardTitle>
+              <CardDescription>
+                Scheduled activities and reminders
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {upcomingTasks.map((task, index) => (
+                  <div key={index} className="p-3 border rounded-lg">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-gray-900">
+                          {task.task}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">{task.due}</p>
+                      </div>
+                      <Badge
+                        variant={
+                          task.priority === "high"
+                            ? "destructive"
+                            : task.priority === "medium"
+                              ? "secondary"
+                              : "outline"
+                        }
+                        className="text-xs"
+                      >
+                        {task.priority}
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Today's Schedule */}
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold">
+              Today's Schedule
+            </CardTitle>
+            <CardDescription>
+              Class schedule and attendance status
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                {
+                  time: "08:00 - 08:45",
+                  class: "Class 10A - Mathematics",
+                  status: "completed",
+                  attendance: "28/30",
+                },
+                {
+                  time: "09:00 - 09:45",
+                  class: "Class 9B - English",
+                  status: "active",
+                  attendance: "25/29",
+                },
+                {
+                  time: "10:00 - 10:45",
+                  class: "Class 11A - Physics",
+                  status: "upcoming",
+                  attendance: "-",
+                },
+                {
+                  time: "11:00 - 11:45",
+                  class: "Class 10B - Chemistry",
+                  status: "upcoming",
+                  attendance: "-",
+                },
+                {
+                  time: "12:00 - 12:45",
+                  class: "Class 9A - History",
+                  status: "upcoming",
+                  attendance: "-",
+                },
+                {
+                  time: "14:00 - 14:45",
+                  class: "Class 11B - Biology",
+                  status: "upcoming",
+                  attendance: "-",
+                },
+              ].map((schedule, index) => (
+                <div key={index} className="p-4 border rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge
+                      variant={
+                        schedule.status === "completed"
+                          ? "default"
+                          : schedule.status === "active"
+                            ? "secondary"
+                            : "outline"
+                      }
+                    >
+                      {schedule.status}
+                    </Badge>
+                    <span className="text-xs text-gray-500">
+                      {schedule.attendance}
+                    </span>
+                  </div>
+                  <p className="font-medium text-gray-900 text-sm">
+                    {schedule.class}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    <Clock className="w-3 h-3 inline mr-1" />
+                    {schedule.time}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+export default Home;
